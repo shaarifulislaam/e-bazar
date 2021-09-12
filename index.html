@@ -1,15 +1,14 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
   <meta charset="UTF-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Fashion Store</title>
+  <title>E-Bazar</title>
   <link rel="stylesheet" href="./css/style.css" />
   <!-- Latest compiled and minified CSS -->
-  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"
-    integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous" />
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+
 
   <!-- google Montserrat  font  -->
   <link rel="preconnect" href="https://fonts.googleapis.com" />
@@ -20,19 +19,37 @@
 <body>
   <header></header>
   <main class="main">
-    <div class="search-field">
-      <div class="search-box">
-        <input id="input-field" class="search-field" type="text" />
-        <button type="button" class="btn btn-primary search-button" data-toggle="button" aria-pressed="false"
-          autocomplete="off" id="search-btn" onclick="loadProducts()">
-          Search
-        </button>
+
+    <!-- search box  -->
+    <div class="input-group mb-3 w-25 mt-4 mx-auto">
+      <input type="text" class="form-control" placeholder="Search Product what you want!" aria-label="Recipient's username" aria-describedby="button-addon2">
+      <button class="btn btn-primary rounded-2" type="button" id="search-btn" onclick="loadProducts()">Search</button>
+    </div>
+<!-- Modal -->
+<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel"></h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body" id="modal-body">
+        
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-primary">Save changes</button>
       </div>
     </div>
+  </div>
+</div>
+  <!-- modal end  -->
+
+  
     <div class="row">
       <div class="col-md-9 col-lg-9 col-sm-7">
         <div id="all-products" class="">
-          <h1></h1>
+         
         </div>
       </div>
       <div class="col-md-3 col-lg-3 col-sm-5 cart-main">
@@ -50,19 +67,19 @@
             <tbody>
               <tr>
                 <th>Total Added-Products:</th>
-                <td>$ <span id="total-Products">0</span></td>
+                <td id="total-Products"> 0</td>
                 <td></td>
                 <td></td>
               </tr>
               <tr>
                 <th>Price:</th>
-                <td>$ <span id="price">0</span></td>
+                <td>$<span id="price">0</span></td>
                 <td></td>
                 <td></td>
               </tr>
               <tr>
                 <th>Delivery-Charge:</th>
-                <td>$ <span id="delivery-charge">20</span></td>
+                <td>$<span id="delivery-charge">20</span></td>
                 <td></td>
                 <td></td>
               </tr>
@@ -87,6 +104,10 @@
     </div>
   </main>
   <footer></footer>
+
+
+  <!-- add bootstrap js bundle  -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
 
   <!-- add javascript  file  -->
   <script src="./js/app.js"></script>
