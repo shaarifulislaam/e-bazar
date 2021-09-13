@@ -6,7 +6,7 @@ const loadProducts = () => {
 };
 loadProducts();
 
-// show all product in UI 
+// show all product in UI
 const showProducts = (products) => {
   const allProducts = products.map((pd) => pd);
 
@@ -19,24 +19,25 @@ const showProducts = (products) => {
     <div class="p-2">
     <img class="product-image " class="" src=${image}></img>
       </div>
-      <h3>${product.title.slice(0,40)}</h3>
+      <h3>${product.title.slice(0, 40)}</h3>
       <p><b>Category:</b> ${product.category}</p>
       <p><b>Rating:</b>  ${product.rating.rate} (${product.rating.count})</p>
-      <h2><b>Price: $</b> ${product.price}</h2>
     </div>
-      <div class="button-area d-flex justify-content-around pb-3">
-      <div>
-      <button onclick="addToCart(${product.id},${product.price}),updateTotal()" id="addToCart-btn" class="buy-now btn btn-primary">Add to cart</button>
-      </div>
-    <div>  
-     <button  id="details-btn" class="btn btn-secondary " data-bs-toggle="modal" data-bs-target="#exampleModal" onclick="getProductDetails('${product.id}')">Details</button>
-     </div>
-   
-      </div>
+    <div class="footer-area ">
+    <h3><b>Price: $</b> ${product.price}</h3>
+    <div class="d-flex justify-content-around pb-3">
+    <button onclick="addToCart(${product.id},${
+      product.price
+    })" id="addToCart-btn" class="buy-now btn btn-primary">Add to cart</button>
+
+   <button  id="details-btn" class="btn btn-secondary " data-bs-toggle="modal" data-bs-target="#exampleModal" onclick="getProductDetails('${
+     product.id
+   }')">Details</button>
     </div>
-      
+    </div>
+    </div>
       `;
-      document.getElementById("all-products").appendChild(div);
+    document.getElementById("all-products").appendChild(div);
   }
 };
 let count = 0;
@@ -44,6 +45,7 @@ const addToCart = (id, price) => {
   count = count + 1;
   updatePrice("price", price);
   updateTaxAndCharge();
+  updateTotal();
   document.getElementById("total-Products").innerText = count;
 };
 
@@ -86,34 +88,30 @@ const updateTaxAndCharge = () => {
 //grandTotal update function
 const updateTotal = () => {
   const grandTotal =
-    getInputValue("price") + getInputValue("delivery-charge") +
+    getInputValue("price") +
+    getInputValue("delivery-charge") +
     getInputValue("total-tax");
   document.getElementById("total").innerText = grandTotal.toFixed(2);
 };
 
-
 //single product details
-const getProductDetails = id =>{
-  
-  const url =`https://fakestoreapi.com/products/${id}`
+const getProductDetails = (id) => {
+  const url = `https://fakestoreapi.com/products/${id}`;
   fetch(url)
-  .then(res =>res.json())
-  .then(data =>displayProductDetails(data))
-  
-}
-// display single product in modal 
-const displayProductDetails = singleProduct => {
+    .then((res) => res.json())
+    .then((data) => displayProductDetails(data));
+};
+// display single product in modal
+const displayProductDetails = (singleProduct) => {
   //destructuring
-  const {title,image,category,description,price} = singleProduct;
-  const {rate,count} = singleProduct.rating;
-  document.getElementById('exampleModalLabel').innerText =title;
-  document.getElementById('modal-body').innerHTML =`
+  const { title, image, category, description, price } = singleProduct;
+  const { rate, count } = singleProduct.rating;
+  document.getElementById("exampleModalLabel").innerText = title;
+  document.getElementById("modal-body").innerHTML = `
   <img class="rounded mx-auto d-block"  width="70%" src="${image}" alt="">
     <p class="mt-3"><b>Category</b>: ${category}</p>
-    <p><b>Description: </b> ${description.slice(0,200)}</p>
+    <p><b>Description: </b> ${description.slice(0, 200)}</p>
     <p><b>Rating:</b>  ${rate} (${count})</p>
     <h2>Price: $ ${price}</h2>
-  
-  
-  `
-} 
+  `;
+};
