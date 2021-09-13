@@ -11,24 +11,32 @@ const showProducts = (products) => {
   const allProducts = products.map((pd) => pd);
 
   for (const product of allProducts) {
-    const allProductsDiv = document.getElementById("all-products");
     const image = product.image;
     const div = document.createElement("div");
     div.classList.add("product");
-    div.innerHTML = `<div class="single-product">
-      <div>
-    <img class="product-image" src=${image}></img>
+    div.innerHTML = `<div class="single-product card h-100 p-3 rounded-3 shadow-sm">
+    <div class="product rounded-3 shadow-sm">
+    <div class="p-2">
+    <img class="product-image " class="" src=${image}></img>
       </div>
-      <h3>${product.title}</h3>
+      <h3>${product.title.slice(0,40)}</h3>
       <p><b>Category:</b> ${product.category}</p>
       <p><b>Rating:</b>  ${product.rating.rate} (${product.rating.count})</p>
       <h2><b>Price: $</b> ${product.price}</h2>
-      <button onclick="addToCart(${product.id},${product.price}),updateTotal()" id="addToCart-btn" class="buy-now btn btn-success">add to cart</button>
-
-      <button  id="details-btn" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#exampleModal" onclick="getProductDetails('${product.id}')">Details</button>
+    </div>
+      <div class="button-area d-flex justify-content-around pb-3">
+      <div>
+      <button onclick="addToCart(${product.id},${product.price}),updateTotal()" id="addToCart-btn" class="buy-now btn btn-primary">Add to cart</button>
       </div>
+    <div>  
+     <button  id="details-btn" class="btn btn-secondary " data-bs-toggle="modal" data-bs-target="#exampleModal" onclick="getProductDetails('${product.id}')">Details</button>
+     </div>
+   
+      </div>
+    </div>
+      
       `;
-      allProductsDiv.appendChild(div);
+      document.getElementById("all-products").appendChild(div);
   }
 };
 let count = 0;
@@ -93,14 +101,15 @@ const getProductDetails = id =>{
   .then(data =>displayProductDetails(data))
   
 }
+// display single product in modal 
 const displayProductDetails = singleProduct => {
   //destructuring
   const {title,image,category,description,price} = singleProduct;
   const {rate,count} = singleProduct.rating;
   document.getElementById('exampleModalLabel').innerText =title;
   document.getElementById('modal-body').innerHTML =`
-  <img width="70%" src="${image}" alt="">
-    <p><b>Category</b>: ${category}</p>
+  <img class="rounded mx-auto d-block"  width="70%" src="${image}" alt="">
+    <p class="mt-3"><b>Category</b>: ${category}</p>
     <p><b>Description: </b> ${description.slice(0,200)}</p>
     <p><b>Rating:</b>  ${rate} (${count})</p>
     <h2>Price: $ ${price}</h2>
